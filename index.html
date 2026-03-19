@@ -1,228 +1,405 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="ar" dir="rtl">
 <head>
-	<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>بطاقة تهنئة - عين الخيال الإعلامية</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content=" اليوم الوطني 95 -إهداء طلاب ومنسوبي المدرسة بمكة المكرمة ">
-    <meta name="author" content="المدرسة الصولتية بمكة المكرمة">
+    :root{
+      --gold:#AD8252;
+      --dark:#2b2b2b;
+      --bg:#f4efe8;
+      --card:#ffffff;
+      --border:#e6dfd6;
+    }
+    #balloon-layer{
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-	<meta property="og:site_name" content="اليوم الوطني 95 -إهداء طلاب ومنسوبي المدرسة بمكة المكرمة" /> <!-- website name -->
-	<meta property="og:site" content="" /> <!-- website link -->
-	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-	<meta property="og:description" content="اليوم الوطني 95 -إهداء طلاب ومنسوبي المدرسة بمكة المكرمة" /> <!-- description shown in the actual shared post -->
-	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-	<meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
+.balloon{
+  position: absolute;
+  bottom: -150px; /* يبدأ تحت الشاشة */
+  width: 80px;
+  height: auto;
 
-    <!-- Webpage Title -->
-    <title>اليوم الوطني 95</title>
-    
-    <!-- Styles -->
-   
+  animation-name: fly;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="css/swiper.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
-	
-	<!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
+  opacity: 0.9;
+}
+
+/* 🎈 طيران حقيقي */
+@keyframes fly {
+
+  0% {
+    bottom: -150px;
+    transform: translateX(0px) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  30% {
+    transform: translateX(20px) rotate(5deg);
+  }
+
+  50% {
+    transform: translateX(-25px) rotate(-5deg);
+  }
+
+  70% {
+    transform: translateX(15px) rotate(3deg);
+  }
+
+  100% {
+    bottom: 110vh; /* 🔥 يطلع فوق الشاشة */
+    transform: translateX(-10px) rotate(-2deg);
+    opacity: 0;
+  }
+}
+    body{
+      margin:0;
+      font-family:Tajawal, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--dark);
+    }
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:18px;
+    }
+    h3{
+      margin:6px 0 10px;
+      font-size:24px;
+      color:var(--dark);
+    }
+    p{
+      margin:0 0 14px;
+      color:#444;
+    }
+    .box{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    label{
+      display:block;
+      margin:10px 0 6px;
+      font-weight:700;
+      color:var(--dark);
+    }
+    input{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #e1d9cf;
+      outline:none;
+      font-size:16px;
+      background:#faf8f5;
+      color:var(--dark);
+    }
+    button{
+      width:100%;
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+      font-size:16px;
+      background:var(--gold);
+      color:#111;
+    }
+    .note{
+      margin-top:10px;
+      font-size:12px;
+      color:#666;
+      line-height:1.6;
+    }
+    .preview{
+      display:grid;
+      justify-items:center;
+      gap:12px;
+    }
+    canvas{
+      width:100%;
+      max-width:480px;
+      height:auto;
+      border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+    }
+    /* Arrow Controls (Gold + Dark Gray) */
+    .controls{
+      margin-top:10px;
+      display:grid;
+      gap:6px;
+      justify-items:center;
+      width:100%;
+      max-width:480px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#faf8f5;
+    }
+    .arrow-row{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+    }
+    .arrow-btn{
+      background:var(--dark);
+      color:#fff;
+      width:48px;
+      height:48px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-size:18px;
+      font-weight:700;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .reset-btn{
+      background:var(--gold);
+      color:#111;
+      width:auto;
+      padding:10px 16px;
+      border-radius:12px;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    @media (max-width: 900px){
+      .box{ grid-template-columns:1fr; }
+      canvas{ max-width:100%; }
+      .controls{ max-width:100%; }
+    }
+  </style>
 </head>
+
 <body>
-    
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
-        <div class="container">
+   <div id="balloon-layer"></div>
+  <div class="wrap">
+    <h3>إهداء من شركة عين الخيال الإعلامية ✨ صمّم بطاقتك الخاصة</h3>
+    <p>اكتب اسمك، يمكنك تعديل مكانه بالأسهم، وبعدها حمّل البطاقة.</p>
 
-            <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.png" alt="alternative"></a> 
+    <div class="box">
+      <div>
+        <label for="name">الاسم</label>
+        <input id="name" type="text" placeholder="اكتب اسمك هنا" autocomplete="name" />
 
-            <!-- Text Logo - اليوم الوطني 95 -->
-            <!-- <a class="navbar-brand logo-text" href="index.html">صمم بطاقتك الخاصة</a> -->
+        <button type="button" id="downloadBtn">تنزيل البطاقة</button>
 
-
-        </div> <!-- end of container -->
-    </nav> <!-- end of navbar -->
-    <!-- end of navigation -->
-
-      
-    <!-- Header -->
-    <header id="header" class="header">
-        <img class="decoration-star" src="images/decoration-star.svg" alt="alternative">
-        <img class="decoration-star-2" src="images/decoration-star.svg" alt="alternative">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-xl-5">
-                    <div class="text-container">
-                        <h1 class="h1-large">عــــــزنا بطبعـنــــا</h1>
-                        <p class="p-large" > اليوم الوطني 95</p>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-5 col-xl-7">
-                    <div class="image-container">
-                        <img class="img-fluid" src="images/header.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </header> <!-- end of header -->
-    <!-- end of header -->
-
-    
-   <!-- <header class="header-up">
-    </header> -->
-  
-    <div class="body2">
-    <div class="controls">
-     <!-- <input class="controls__input" type="file" id="imageLoader" name="imageLoader"/>
-      <label class="controls__label" for="name">First, choose an image.</label> -->
-      <br>
-      <label class="controls__label" for="name"> الاسم</label>
-            <br>
-  
-            <input class="controls__input" id="name" type="text" value=""/>
-        <br>
-        <br>
-  
-    </div>
-    
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-      
-    <div id="canvas-wrap"  class="canvas">
-       <canvas  id="imageCanvas" width=2160px height=3840px>
-         <span style="font-family: 'Aktiv Grotesk Arabic', sans-serif; font-weight: bold;">&nbsp;</span> 
-         <canvas id="canvasID"></canvas>
-      </canvas> 
-    
-      <br>
-      <button  type="button" class="controls__btn">    <a id="download" download="Eid2024.jpg" href="" onclick="download_img(this);">تنزيل</a>
-  </button>
+        <div class="note">
+          📌 الاسم سيظهر أسفل عبارة التهنئة. يمكنك تحريك الاسم بالأسهم.
         </div>
+      </div>
+
+      <div class="preview">
+        <!-- Canvas size MUST match your image size -->
+        <canvas id="imageCanvas" width="2160" height="3840"></canvas>
+
+        <!-- Arrows + Reset -->
+        <div class="controls">
+          <div>
+            <button type="button" class="arrow-btn" id="upBtn">↑</button>
+          </div>
+          <div class="arrow-row">
+            <button type="button" class="arrow-btn" id="leftBtn">←</button>
+            <button type="button" class="arrow-btn" id="rightBtn">→</button>
+          </div>
+          <div>
+            <button type="button" class="arrow-btn" id="downBtn">↓</button>
+          </div>
+
+          <button type="button" class="reset-btn" id="resetBtn">إرجاع الوضع الافتراضي</button>
+        </div>
+
+        <!-- Hidden download link -->
+        <a id="downloadLink" download="Card.png" href="#" style="display:none;"></a>
+      </div>
     </div>
-    </div> <!-- end of col -->
-</div> <!-- end of row -->
-
-
-
-  
-       <!-- <div id="canvas-wrap1"  class="canvas">
-       <canvas style="display:block" id="imageCanvas1" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download1" download="Ramadan2024.jpg" href="" onclick="download_img1(this);">تنزيل</a>
-  </button>
-           </div> -->
-      
-       
-  
-      <!-- <div id="canvas-wrap2"  class="canvas">
-       <canvas style="display:block" id="imageCanvas2" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download2" download="Ramadan2024.jpg" href="" onclick="download_img2(this);">تنزيل</a>
-  </button>
-           </div>-->
-      
-    
-  
-      <!-- <div id="canvas-wrap3"  class="canvas">
-       <canvas style="display:block" id="imageCanvas3" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download3" download="Ramadan2024.jpg" href="" onclick="download_img3(this);">تنزيل</a>
-  </button>
-           </div>-->
-      
-  
-       <!-- <div id="canvas-wrap4"  class="canvas">
-       <canvas style="display:block" id="imageCanvas4" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download4" download="Ramadan2024.jpg" href="" onclick="download_img4(this);">تنزيل</a>
-  </button>
-           </div> -->
-      
-     
-      <!-- <div id="canvas-wrap5"  class="canvas">
-       <canvas style="display:block" id="imageCanvas5" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download5" download="Ramadan2024.jpg" href="" onclick="download_img5(this);">تنزيل</a>
-  </button>
-           </div>-->
-      
-      
-  
-      <!-- <div id="canvas-wrap6"  class="canvas">
-       <canvas style="display:block" id="imageCanvas6" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download6" download="Ramadan2024.jpg" href="" onclick="download_img6(this);">تنزيل</a>
-  </button>
-           </div>
-          
-            <br>
-      <br> -->
-          
-  <!-- <div id="canvas-wrap7"  class="canvas">
-       <canvas style="display:block" id="imageCanvas7" width=450px height=450px >
-          <canvas id="canvasID1"></canvas>
-      </canvas> 
-      
-       <br>
-      <button  type="button" class="controls__btn">    <a id="download6" download="Ramadan2024.jpg" href="" onclick="download_img(this);">تنزيل</a>
-  </button>
-           </div> -->
-      
   </div>
-  </div>
-      
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js'></script>
-  
-    
-  
-      <script  src="js/newindex.js"></script>
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="footer bg-gray">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-        Copyright (c) 2025 <a href="" ><strong style="color: #008A4A" >ِAl-Soltyah School</strong></a> All Rights Reserved.
-    </div> <!-- end of col -->
-</div> <!-- end of row -->
-</div> <!-- end of container -->
-</div> <!-- end of footer -->  
-      </footer>
-    <!-- end of footer -->
 
-    	
-    <!-- Scripts -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-    <script src="js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+  <script>
+    (() => {
+      const canvas = document.getElementById("imageCanvas");
+      const ctx = canvas.getContext("2d");
+      const nameInput = document.getElementById("name");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const downloadLink = document.getElementById("downloadLink");
+
+      const upBtn = document.getElementById("upBtn");
+      const downBtn = document.getElementById("downBtn");
+      const leftBtn = document.getElementById("leftBtn");
+      const rightBtn = document.getElementById("rightBtn");
+      const resetBtn = document.getElementById("resetBtn");
+
+      if (!canvas || !ctx || !nameInput || !downloadBtn || !downloadLink) return;
+
+      // Keep page Arabic RTL
+      document.documentElement.lang = "ar";
+      document.documentElement.dir = "rtl";
+
+      // Image size
+      canvas.width = 2160;
+      canvas.height = 3840;
+
+      // ✅ Default name position on the red line (based on your card)
+      const DEFAULT_X = 1080;  // center of 2160
+      const DEFAULT_Y = 2840;  // on the red line (adjust with arrows if needed)
+
+      let nameX = DEFAULT_X;
+      let nameY = DEFAULT_Y;
+
+      const STEP = 10;
+
+      // ✅ Company colors for name: Dark Gray (and you can switch to gold if desired)
+      const NAME_COLOR = "#B38A5D";  // gold
+      const FONT_FAMILY = "Tajawal, Arial, sans-serif";
+      const FONT_WEIGHT = "700";
+
+      // Background image (put your card image here)
+      // ✅ Place your file at: images/card.png
+      const bgImg = new Image();
+      bgImg.crossOrigin = "anonymous";
+      bgImg.src = "images/card.png";
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (bgImg.complete && bgImg.naturalWidth) {
+          ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+        }
+
+        const name = (nameInput.value || "").trim();
+        if (!name) return;
+
+        // base font size (auto-fit for long names)
+        let fontSize = 92;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = NAME_COLOR;
+        ctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
+
+        const maxWidth = canvas.width * 0.75;
+        while (ctx.measureText(name).width > maxWidth && fontSize > 55) {
+          fontSize -= 2;
+          ctx.font = `${FONT_WEIGHT} ${fontSize}px ${FONT_FAMILY}`;
+        }
+
+        ctx.fillText(name, nameX, nameY);
+      }
+
+      function move(dx, dy) {
+        nameX += dx;
+        nameY += dy;
+        draw();
+      }
+
+      function download() {
+        draw();
+        const dataUrl = canvas.toDataURL("image/png");
+
+        const safeName = (nameInput.value || "name")
+          .trim()
+          .replace(/[^\w\u0600-\u06FF\u00C0-\u017F\s-]/g, "")
+          .replace(/\s+/g, "_");
+
+        downloadLink.href = dataUrl;
+        downloadLink.download = `FantasyEye_${safeName}.png`;
+        downloadLink.click();
+      }
+
+      // Mobile-safe binding
+      function bindPress(el, fn) {
+        if (!el) return;
+        el.addEventListener("click", (e) => { e.preventDefault(); fn(); }, { passive: false });
+        el.addEventListener("touchstart", (e) => { e.preventDefault(); fn(); }, { passive: false });
+      }
+
+      bindPress(upBtn, () => move(0, -STEP));
+      bindPress(downBtn, () => move(0, STEP));
+      bindPress(leftBtn, () => move(-STEP, 0));
+      bindPress(rightBtn, () => move(STEP, 0));
+
+      bindPress(resetBtn, () => {
+        nameX = DEFAULT_X;
+        nameY = DEFAULT_Y;
+        draw();
+      });
+
+      nameInput.addEventListener("input", draw);
+      downloadBtn.addEventListener("click", download);
+
+      bgImg.onload = draw;
+    })();
+  </script>
+  <script>
+window.addEventListener("load", () => {
+
+  const layer = document.getElementById("balloon-layer");
+
+  const images = [
+    "balloon-gold-1.png",
+    "balloon-blue-1.png"
+  ];
+
+  const total = 18;
+
+  for (let i = 0; i < total; i++) {
+
+    const b = document.createElement("img");
+    b.className = "balloon";
+
+    b.src = images[Math.floor(Math.random() * images.length)];
+
+    b.style.left = Math.random() * 100 + "%";
+    b.style.width = (60 + Math.random() * 40) + "px";
+
+    // سرعة الطيران
+    b.style.animationDuration = (5 + Math.random() * 3) + "s";
+
+    // تأخير بسيط
+    b.style.animationDelay = Math.random() * 1 + "s";
+
+    layer.appendChild(b);
+  }
+
+  setTimeout(() => {
+    layer.innerHTML = "";
+  }, 7000);
+
+});
+</script>
 </body>
 </html>
+
+
+
+
+
 
 
 
